@@ -1,0 +1,16 @@
+version: "3"
+services:
+  mongo:
+    image: mvertes/alpine-mongo
+    ports:
+      - "27017:27017"
+  demo:
+    build:
+      context: ../../
+      dockerfile: docker/build/Dockerfile
+    command: >
+      /bin/sh -c "cd /opt/demo/src && ls -la && uwsgi --ini uwsgi.ini"
+    ports:
+      - "9090:9090"
+    depends_on:
+      - mongo
