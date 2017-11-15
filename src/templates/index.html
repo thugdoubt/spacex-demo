@@ -19,7 +19,7 @@
                         <v-toolbar color="cyan">
                             <v-toolbar-title class="white--text">SpaceX Launches</v-toolbar-title>
                             <v-spacer></v-spacer>
-                            <v-text-field v-model="queryString" prepend-icon="search" hide-details single-line></v-text-field>
+                            <v-text-field v-model="queryString" prepend-icon="search" hide-details single-line autofocus></v-text-field>
                         </v-toolbar>
                         <v-data-table
                             v-bind:headers="headers"
@@ -32,6 +32,7 @@
                                 <td>{{ item.item.launch_year }}</td>
                                 <td>{{ item.item.rocket.rocket_name }}</td>
                                 <td>{{ item.item.rocket.rocket_type }}</td>
+                                <td>{{ item.item.launch_site.site_name }}</td>
                                 <td v-if="item.item.launch_success"><v-chip color="green" text-color="white">Y</v-chip></td>
                                 <td v-if="!item.item.launch_success"><v-chip color="red" text-color="white">N</v-chip></td>
                                 <td>{{ item.item.details }}</td>
@@ -78,6 +79,12 @@ var demo = new Vue({
                 align: "left",
                 sortable: true,
                 value: "rocket.rocket_type"
+            },
+            {
+                text: "Launch Site",
+                align: "left",
+                sortable: true,
+                value: "launch_site.site_name"
             },
             {
                 text: "Success",
